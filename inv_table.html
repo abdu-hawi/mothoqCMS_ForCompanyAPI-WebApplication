@@ -1,0 +1,395 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="include/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="include/dataTable/datatables.min.css">
+<link rel="stylesheet" type="text/css" href="include/css/invoice-style.css">
+<link rel="stylesheet" type="text/css" href="include/css/invoice-style-main-page.css">
+<link rel="stylesheet" type="text/css" href="include/fonts/font-awesome.min.css">
+<title>تصميم واجهة فواتير</title>
+<script src="include/js/jquery-3.2.1.min.js"></script>
+<script src="include/js/bootstrap-3.3.7.min.js"></script>
+<script src="include/dataTable/jquery.dataTables.min.js"></script>
+<script src="include/dataTable/datatables.min.js"></script>
+
+</head>
+
+<style>
+.fa-twitter-s{
+	font-size: 40px;
+	color:#50abf3;
+}
+
+.fa-youtube-s {
+	font-size: 40px;
+	color:#ef1c1b;
+}
+
+@media (min-width: 768px){
+	.fa-bell-s {
+		color:#fff;
+		margin-left:10px;
+		margin-top:20px;
+	}
+}
+@media (max-width: 767px){
+	.fa-bell-s {
+		color:#fff;
+		margin-left:5px;
+	}
+}
+
+/*  hide search box default of searchTable */
+.dataTables_filter {
+     display: none;
+}
+.dataTables_length{
+     display: none;
+}
+
+</style>
+<!--   style="font-size:large;" -->
+<body style="background-color:#fafafa;">
+
+<div id="menubar" class="main-menu">
+<nav class="navbar">
+  <div class="container-fluid navbar-my-default  navbar-fixed-top">
+    <div class="container">
+    	<div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#asideNav">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="#"><img src="img/logo.png" height="50" /></a>
+          
+          <!-- if not work collapse use this -->
+          <!--
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li> 
+                <li><a href="#">Page 3</a></li> 
+              </ul>
+            </div>
+         -->
+		 <div class="navbar-toggle navbar-toggle-inv">
+			<span align="center" class="navbar-left">
+			  <a href="#" style="font-size:large;"><i class="fa fa-circle fa-3x"></i></a>
+			</span>
+			<span align="center" class="navbar-left">
+			  <i><a href="#"><i class="fa fa-bell-o fa-bell-s"></i></a></i>
+			</span>
+			<span align="center" class="navbar-left">
+			  <i><a href="#"><i class="fa fa-twitter fa-bell-s"></i></a></i>
+			</span>
+        </div>
+        </div>
+		
+		 <div class="navbar-left hidden-xs">
+			<span align="center" class="navbar-left">
+			  <a href="#" style="font-size:large;"><i class="fa fa-circle fa-3x"></i></a>
+			</span>
+			<span align="center" class="navbar-left">
+			  <i><a href="#"><i class="fa fa-bell-o fa-bell-s"></i></a></i>
+			</span>
+			<span align="center" class="navbar-left">
+			  <i><a href="#"><i class="fa fa-twitter fa-bell-s"></i></a></i>
+			</span>
+        </div>
+        
+        
+        
+        
+    </div><!--  End container 1 -->
+ </div> <!-- End container-fluid 1 -->
+<!--   style="font-size:x-large;"  -->
+ <div class="navbar-default  navbar-fixed-top" style="margin-top:105px;">
+    <div class="collapse navbar-collapse" id="asideNav">
+      <div class="aside-in col-lg-2">
+          <ul class="nav navbar-nav nav-in">
+          <li><div class="hr-inv"></div>
+            <button type="button" class="btn btn-success btn-block btn-block-in btn-success-in">إنشاء فاتورة جديدة</button>
+            <li><a href="#">الفواتير الواردة <i class="fa fa-send-o fa-rotate-180"></i></a></li>
+            <li class="active"><a href="#">الفواتير المرسلة <i class="fa fa-send-o"></i></a></li>
+			<li><a href="#">الفواتير المميزة بنجمة <i class="fa fa-star-o"></i></a></li>
+            <li><a href="#">الفواتير المهملة <i class="fa fa-trash-o"></i></a></li>
+            
+          </ul>
+        </div>
+    </div>
+ </div>
+ 
+ 
+ <div class="container-fluid navbar-default  navbar-fixed-top container-fluid-inv" style="margin-top:70px;">
+ 	<div class="container con-inv">
+    	<ul class="nav navbar-nav navbar-right">
+          
+            <li class="dropdown li-inv-h">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class=" i-invo"><span class="caret"></span></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">الكل</a></li>
+                  <li><a href="#">لاشيء</a></li>
+                  <li><a href="#">مقروءة</a></li>
+                  <li><a href="#">غير مقروءة</a></li>
+                  <li><a href="#">المميزة بنجمة</a></li>
+                  <li><a href="#">بدون نجمة</a></li>
+                  <li><a href="#">المهمة</a></li>
+                  <li><a href="#"></a></li>
+                  <li><a href="#"></a></li>
+                </ul>
+                <a href="#"><i class="fa fa-square-o" ></i></a>
+          	</li>
+            <li id="nnn"></li>
+            <li class="li-inv-h">
+            	<span>
+                    <a href="#"><i class="fa fa-undo" ></i></a>
+                </span>
+            </li>
+            <li class="dropdown li-inv-h">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class=" i-invo"><span class="caret"></span></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">وضع علامة مقروءة على الجميع</a></li>
+                  <li><hr class="hr-inv"></li>
+                  <li style="text-align: right;padding-right: 20px; color:#999;">حدد رسائل للاطلاع على مزيد من الاجراءات</li>
+                </ul>
+                <a href="#">المزيد</a>
+          	</li>
+            
+          </ul>
+          
+          <!--
+          <div class="show_page" id="dd"></div>
+          -->
+          
+    	<form class="navbar-form navbar-left">
+          <div class="input-group">
+            
+            <div class="input-group-btn">
+              <button class="btn btn-primary" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+            <input type="text" class="form-control" id="searchBox">
+          </div>
+        </form>
+        
+        
+    </div>
+    
+    
+ </div>
+</nav>
+</div><!---- End Header (main-menu) ----->
+
+
+
+<hr>
+
+
+
+<div class="col-lg-10-inv col-lg-10" style="background:#fff;">
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home" style="padding-left: 8.3em;padding-right: 0.39em;">الفواتير</a></li>
+    <li><a data-toggle="tab" href="#menu1" style="padding-left: 3.831em;
+    padding-right: 0.00086em;">الشركات والمؤسسات</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+		 <br/>
+      <div >
+      	<table id="data-table" class="table table-hover">
+            <thead>
+            	<tr>
+                    <th>img</th>
+                    <th>corner</th>
+                    <th style="text-align: -webkit-right;">item</th>
+                    <th style="text-align: -webkit-left;">price</th>
+                    <th style="text-align: -webkit-center;">city</th>
+                    <th style="text-align: -webkit-left;">date</th>
+                    <th>pdf</th>
+                    <th>x</th>
+                </tr>
+            </thead>
+            <tbody>
+				<tr>
+					<td class="col-lg-1"><img class="img-circle img-inv" src="img/saco.jpg" alt="Chania"></td>
+					<td class="col-lg-1">
+						<span class="fa-m-inv"><i class="fa fa-square-o"></i></span>
+						<span class="fa-m-inv"><i class="fa fa-star-o"></i></span>
+						<span class="fa-m-inv"><img src="img/115791-16.png" /></span>
+					</td>
+					<td class="col-lg-4">لبن مراعي - شطة - خبز - فراولة - فواكهة لبلبلبلباه</td>
+					<td  class="col-lg-1" style="text-align: -webkit-left;"><b>2500</b> رس</td>
+					<td class="col-lg-2" style="text-align: -webkit-center;">جازان / الصفا</td>
+					<td  class="col-lg-2" style="text-align: -webkit-left;">2017/02/15</td>
+					<td class="text-center">
+						<a href="invoice.php?update=1&id=">
+							<span style="color:blue;"><b>PDF</b></span>
+						</a>
+					</td>
+					<td class="text-center">
+						<a href="invoice.php?delete=1&id=" id="" class="delete">
+							<span class="glyphicon glyphicon-remove" style="color:red;"></span>
+						</a>
+					</td>
+				</tr>
+              <tr>
+                <td><img class="img-circle img-inv" src="img/baik.png" alt="Chania" width="50" height="50"></td>
+                <td class="col-lg-1">
+                    <span class="fa-m-inv"><i class="fa fa-square-o"></i></span>
+                    <span class="fa-m-inv"><i class="fa fa-star-o"></i></span>
+                    <span class="fa-m-inv"><img src="img/115791-16.png" /></span>
+                </td>
+                <td class="col-lg-4">صابون تايد 220مل - رز أبو كأس 10ك -</td>
+                <td style="text-align: -webkit-left;"><b>25000</b> رس</td>
+                <td style="text-align: -webkit-center;">جدة / المنتزهات الشرقية</td>
+                <td style="text-align: -webkit-left;">2017/02/15</td>
+                <td class="text-center">
+                	<a href="invoice.php?update=1&id=">
+						<span style="color:blue;"><b>PDF</b></span>
+                    </a>
+                </td>
+                <td class="text-center">
+                	<a href="invoice.php?delete=1&id=" id="" class="delete">
+						<span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                    </a>
+                </td>
+              </tr>
+              <tr>
+                <td><img class="img-circle img-inv" src="img/extra.png" alt="Chania" width="50" height="50"></td>
+                <td class="col-lg-1">
+                    <span class="fa-m-inv"><i class="fa fa-square-o"></i></span>
+                    <span class="fa-m-inv"><i class="fa fa-star-o"></i></span>
+                    <span class="fa-m-inv"><img src="img/115791-16.png" /></span>
+                </td>
+                <td class="col-lg-4">صابون تايد 220مل - رز أبو كأس 10ك -</td>
+                <td style="text-align: -webkit-left;"><b>25</b> رس</td>
+                <td style="text-align: -webkit-center;">مكة المكرمة / شرائع المجاهدين</td>
+                <td style="text-align: -webkit-left;">2017/02/15</td>
+                <td class="text-center">
+                	<a href="invoice.php?update=1&id=">
+						<span style="color:blue;"><b>PDF</b></span>
+                    </a>
+                </td>
+                <td class="text-center">
+                	<a href="invoice.php?delete=1&id=" id="" class="delete">
+						<span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                    </a>
+                </td>
+              </tr>
+			  
+            </tbody>
+        </table>
+      </div>
+        
+    </div> <!-- end id home -->
+	
+    <div id="menu1" class="tab-pane fade">
+		<table class="table table-hover" id="example">
+      	<thead class="hidden">
+            <tr>
+                <th>Rendering engine</th>
+                <th>Browser</th>
+                <th>Browser</th>
+                <th>Platform(s)</th>
+                <th>Platform(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr link="https://www.google.com.sa">
+                <td class="col-lg-2"><img class="img-circle img-inv" src="img/MOS.png" alt="وزارة الداخلية" width="50" height="50"></td>
+                <td class="col-lg-2">وزارة الداخلية</td>
+                <td class="col-lg-3">
+                	<span class="fa-m-inv" id="ch_sq"><i class="fa fa-square-o"></i></span>
+                    <span class="fa-m-inv"><i class="fa fa-star-o"></i></span>
+                    <span class="fa-m-inv"><img src="img/115791-16.png" /></span>
+                </td>
+                <td class="col-lg-4">تعريف بسيط عنها يختفي في حالة الشاشات الصغيرة</td>
+                <td class="col-lg-1">
+                	<a href="invoice.php?delete=1&id=" id="" class="delete">
+						<span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                    </a>
+                </td>
+            </tr>
+            <tr link="#albaik">
+                <td class="col-lg-2"><img class="img-circle img-inv" src="img/baik.png" alt="البيك" width="50" height="50"></td>
+                <td class="col-lg-2">البيك</td>
+                <td class="col-lg-3">
+                	<span class="fa-m-inv" id="ch_sq"><i class="fa fa-square-o"></i></span>
+                    <span class="fa-m-inv"><i class="fa fa-star-o"></i></span>
+                    <span class="fa-m-inv"><img src="img/115791-16.png" /></span>
+                </td>
+                <td class="col-lg-4">تعريف بسيط عنها يختفي في حالة الشاشات الصغيرة</td>
+                <td class="col-lg-1">
+                	<a href="invoice.php?delete=1&id=" id="" class="delete">
+						<span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                    </a>
+                </td>
+            </tr>
+            <tr link="#extra">
+                <td class="col-lg-2"><img class="img-circle img-inv" src="img/extra.png" alt="Extra" width="50" height="50"></td>
+                <td class="col-lg-2">إكسترا</td>
+                <td class="col-lg-3">
+                	<span class="fa-m-inv" id="ch_sq"><i class="fa fa-square-o"></i></span>
+                    <span class="fa-m-inv"><i class="fa fa-star-o"></i></span>
+                    <span class="fa-m-inv"><img src="img/115791-16.png" /></span>
+                </td>
+                <td class="col-lg-4">تعريف بسيط عنها يختفي في حالة الشاشات الصغيرة</td>
+                <td class="col-lg-1">
+                	<a href="invoice.php?delete=1&id=" id="" class="delete">
+						<span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+      
+      </table>
+    </div>
+  </div>
+  
+
+</div>
+
+
+
+</body>
+</html>
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		var dataTable = $('#example').dataTable();
+
+		$("#searchBox").keyup(function() {
+			dataTable.fnFilter(this.value);
+		}); 		
+	});
+</script>
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+        var table = $('#data-table').dataTable({
+			"pageLength":13
+		});
+		$('#searchBox').keyup(function() {
+		   table.fnFilter(this.value);
+		});
+		
+		$(document).on('click','.delete',function(){
+			var id = $(this).attr("id");
+			if(confirm("Are you sure you want to remove this?")){
+				window.location.href == "invoice.php?delete=1&id="+id;
+			}else{
+				return false;
+			}
+		});
+		
+    });
+
+</script>
